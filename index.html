@@ -16,14 +16,14 @@
   #sidebar {
     width: 250px;
     background-color: #fff;
+    height: 100vh;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    position: fixed;
     transition: width 0.3s;
     overflow: hidden;
   }
 
-  #sidebar.collapsed {
-    width: 60px;
-  }
+  #sidebar.collapsed { width: 60px; }
 
   #sidebar-header {
     display: flex;
@@ -66,21 +66,22 @@
     padding: 15px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
   }
 
-  #sidebar ul li:hover {
-    background-color: #ddd;
-  }
+  #sidebar ul li:hover { background-color: #ddd; }
 
-  /* Main content */
   main {
+    margin-left: 250px;
     flex: 1;
     padding: 20px;
+    transition: margin-left 0.3s;
   }
 
-  section {
-    display: none;
-  }
+  #sidebar.collapsed + main { margin-left: 60px; }
+
+  section { display: none; }
 
   #download { display: block; text-align: center; }
 
@@ -100,25 +101,38 @@
   /* Demon List table */
   table {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
 
   th, td {
-    padding: 10px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #eee;
   }
 
-  th {
-    background-color: #f0f0f0;
+  th { background-color: #f0f0f0; }
+
+  tr:hover { background-color: #f9f9f9; }
+
+  .verified-icon, .unverified-icon {
+    height: 20px;
+    vertical-align: middle;
+    margin-left: 5px;
   }
 
-  .verified { color: green; font-weight: bold; }
-  .unverified { color: red; font-weight: bold; }
+  .creator-icon, .decorator-icon, .rating-icon {
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+
+  .news-item { margin-bottom: 10px; }
+
 </style>
 </head>
 <body>
@@ -148,8 +162,8 @@
   <!-- News Section -->
   <section id="news">
     <h2>Latest News</h2>
-    <p>08/13/2025: New Demon "Hellfire" added!</p>
-    <p>08/10/2025: Mobile version updated with bug fixes.</p>
+    <div class="news-item">08/13/2025: New Demon "Hellfire" added!</div>
+    <div class="news-item">08/10/2025: Mobile version updated with bug fixes.</div>
   </section>
 
   <!-- Demon List Section -->
@@ -167,24 +181,24 @@
       </thead>
       <tbody>
         <tr>
-          <td>Find My Way <span class="unverified">(Unverified)</span></td>
-          <td>SKY</td>
-          <td>ICECAM</td>
-          <td>EXTREME DEMON</td>
+          <td>Find My Way <img src="https://i.ibb.co/WpnYgLGC/image.png" class="unverified-icon" alt="Unverified"></td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" class="creator-icon" alt="Sky"> SKY</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="decorator-icon" alt="Icecam"> ICECAM</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
           <td>108</td>
         </tr>
         <tr>
-          <td>Hell <span class="verified">✅</span></td>
-          <td>SKY</td>
-          <td>ICECAM</td>
-          <td>EXTREME DEMON</td>
+          <td>Hell <img src="https://i.ibb.co/WpnYgLGC/image.png" class="verified-icon" alt="Verified"></td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" class="creator-icon" alt="Sky"> SKY</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="decorator-icon" alt="Icecam"> ICECAM</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
           <td>105</td>
         </tr>
         <tr>
-          <td>Some End <span class="verified">✅</span></td>
-          <td>ICECAM</td>
+          <td>Some End <img src="https://i.ibb.co/WpnYgLGC/image.png" class="verified-icon" alt="Verified"></td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="creator-icon" alt="Icecam"> ICECAM</td>
           <td>-</td>
-          <td>EXTREME DEMON</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
           <td>114</td>
         </tr>
       </tbody>
@@ -207,7 +221,8 @@
   }
 
   function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('collapsed');
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('collapsed');
   }
 </script>
 
