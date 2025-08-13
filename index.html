@@ -1,200 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vision GDPS</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
+      margin: 0;
+      background-color: #f5f5f5;
       color: #333;
     }
 
-    /* Sidebar */
-    .sidebar {
-      height: 100%;
-      width: 0;
-      position: fixed;
-      top: 0;
-      left: 0;
-      background-color: #222;
-      overflow-x: hidden;
-      transition: 0.3s;
-      padding-top: 60px;
-      z-index: 2;
-    }
-    .sidebar a {
-      padding: 10px 20px;
-      text-decoration: none;
-      font-size: 18px;
-      color: #ccc;
-      display: block;
-      transition: 0.2s;
-      cursor: pointer;
-    }
-    .sidebar a:hover {
-      background-color: #444;
-      color: white;
-    }
-    .sidebar .closebtn {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 30px;
-      color: white;
-      cursor: pointer;
-    }
-
-    /* Open button */
-    .openbtn {
-      font-size: 20px;
-      cursor: pointer;
-      background-color: #222;
-      color: white;
-      padding: 10px 15px;
-      border: none;
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 1;
-      border-radius: 5px;
-    }
-
-    /* Content */
-    main {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px;
-      background-color: white;
-      margin-top: 60px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
     header {
-      text-align: center;
-      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
+
     header img {
-      max-width: 150px;
-      opacity: 0.1;
+      height: 60px;
+      margin-right: 15px;
+      background-color: #fff;
+      padding: 5px;
+      border-radius: 10px;
     }
-    h2 {
-      color: #555;
-      margin-top: 40px;
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
     }
-    .btn {
+
+    nav ul li {
+      cursor: pointer;
+      padding: 10px 15px;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+
+    nav ul li:hover {
+      background-color: #ddd;
+    }
+
+    section {
+      display: none;
+      padding: 20px;
+    }
+
+    section h2 {
+      margin-top: 0;
+    }
+
+    #download {
+      display: block; /* default section */
+      text-align: center;
+    }
+
+    .download-btn {
       display: inline-block;
-      margin: 15px 10px;
-      padding: 14px 28px;
-      background-color: #555;
-      color: white;
+      margin: 10px;
+      padding: 12px 25px;
+      background-color: #4CAF50;
+      color: #fff;
       text-decoration: none;
-      border-radius: 6px;
+      border-radius: 5px;
       font-weight: bold;
-      font-size: 1.2rem;
-      transition: background-color 0.3s ease;
     }
-    .btn:hover {
-      background-color: #333;
+
+    .download-btn:hover {
+      background-color: #45a049;
     }
-    .demon-list {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 15px;
+
+    .news-item {
+      background-color: #fff;
+      padding: 12px 15px;
+      margin: 10px 0;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
-    .demon-list th, .demon-list td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: center;
+
+    .demon {
+      background-color: #fff;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .demon-list th {
-      background-color: #eee;
+
+    .demon img {
+      width: 40px;
+      height: 40px;
     }
+
     footer {
-      background-color: #e0e0e0;
-      padding: 15px 0;
-      font-size: 0.9rem;
-      color: #666;
       text-align: center;
-      margin-top: 30px;
+      padding: 10px;
+      background-color: #fff;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
-<!-- Sidebar -->
-<div id="mySidebar" class="sidebar">
-  <span class="closebtn" onclick="closeNav()">&times;</span>
-  <a onclick="showSection('download')">📥 Download</a>
-  <a onclick="showSection('demonlist')">💀 Demon List & Top Players</a>
-  <a onclick="showSection('about')">ℹ️ About Us</a>
-</div>
-
-<!-- Open button -->
-<button class="openbtn" onclick="openNav()">☰ Menu</button>
-
 <header>
   <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision GDPS Logo">
+  <h1>Vision GDPS</h1>
 </header>
 
+<nav>
+  <ul>
+    <li onclick="showSection('download')">Download</li>
+    <li onclick="showSection('news')">News</li>
+    <li onclick="showSection('demon-list')">Demon List</li>
+    <li onclick="showSection('about')">About Us</li>
+  </ul>
+</nav>
+
 <main>
-  <!-- Download Section (default visible) -->
+  <!-- Download Section -->
   <section id="download">
-    <h2>📥 Download Vision GDPS</h2>
-    <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" class="btn" target="_blank">Download for PC</a>
-    <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" class="btn" target="_blank">Download for Mobile</a>
+    <h2>Download Vision GDPS</h2>
+    <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" target="_blank" class="download-btn">Download PC</a>
+    <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" target="_blank" class="download-btn">Download Mobile</a>
   </section>
 
-  <!-- Demon List Section (hidden by default) -->
-  <section id="demonlist" style="display:none;">
-    <h2>💀 Official Demon List & Top Players</h2>
-    <table class="demon-list">
-      <thead>
-        <tr>
-          <th>Rank</th>
-          <th>Level</th>
-          <th>Creator</th>
-          <th>Decorator</th>
-          <th>Rating</th>
-          <th>ID</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Find My Way</td>
-          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-          <td>108</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Hell</td>
-          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-          <td>105</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Some End</td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-          <td>—</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-          <td>114</td>
-        </tr>
-      </tbody>
-    </table>
+  <!-- News Section -->
+  <section id="news">
+    <h2>Latest News</h2>
+    <div class="news-item">
+      <strong>[08/13/2025]</strong> New Demon "Hellfire" added to Vision GDPS!
+    </div>
+    <div class="news-item">
+      <strong>[08/10/2025]</strong> Mobile version updated with bug fixes.
+    </div>
   </section>
 
-  <!-- About Section (hidden by default) -->
-  <section id="about" style="display:none;">
-    <h2>ℹ️ About Us</h2>
-    <p>Vision GDPS is a fan-made Geometry Dash Private Server (GDPS) where you can play, create, and share custom levels. Join our Discord for updates and support!</p>
-    <a href="https://discord.gg/8FBhmRqYdN" target="_blank" class="btn">Join Our Discord</a>
+  <!-- Demon List Section -->
+  <section id="demon-list">
+    <h2>Official Demon List</h2>
+
+    <div class="demon">
+      <img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">
+      <div>
+        <strong>Find My Way</strong> (Unverified)<br>
+        Made by: SKY<br>
+        Decorated by: ICECAM<br>
+        Rating: EXTREME DEMON<br>
+        ID: 108
+      </div>
+    </div>
+
+    <div class="demon">
+      <img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">
+      <div>
+        <strong>Hell</strong> ✅<br>
+        Made by: SKY<br>
+        Decorated by: ICECAM<br>
+        Rating: EXTREME DEMON<br>
+        ID: 105
+      </div>
+    </div>
+
+    <div class="demon">
+      <img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">
+      <div>
+        <strong>Some End</strong> ✅<br>
+        Made by: ICECAM<br>
+        Rating: EXTREME DEMON<br>
+        ID: 114
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Vision GDPS</h2>
+    <p>Vision GDPS is a fun Geometry Dash private server made by VisionSkyy. Play custom levels, challenge yourself, and enjoy the community!</p>
   </section>
 </main>
 
@@ -203,20 +192,12 @@
 </footer>
 
 <script>
-function openNav() {
-  document.getElementById("mySidebar").style.width = "250px";
-}
-function closeNav() {
-  document.getElementById("mySidebar").style.width = "0";
-}
-
-function showSection(id) {
-  const sections = ['download', 'demonlist', 'about'];
-  sections.forEach(sec => {
-    document.getElementById(sec).style.display = (sec === id) ? 'block' : 'none';
-  });
-  closeNav();
-}
+  function showSection(sectionId) {
+    const sections = ['download', 'news', 'demon-list', 'about'];
+    sections.forEach(id => {
+      document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
+    });
+  }
 </script>
 
 </body>
