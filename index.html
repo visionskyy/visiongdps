@@ -6,45 +6,84 @@
 <title>Vision GDPS</title>
 <style>
   body {
-    background-color: #f0f0f0;
-    color: #333333;
-    font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
   }
-  header {
-    background-color: #ffffff;
-    width: 100%;
-    padding: 20px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  /* Sidebar */
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #222;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 2;
   }
-  header img {
-    max-width: 150px;
-    margin-top: 10px;
+  .sidebar a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #ccc;
+    display: block;
+    transition: 0.2s;
   }
+  .sidebar a:hover {
+    background-color: #444;
+    color: white;
+  }
+  .sidebar .closebtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+  }
+  /* Open button */
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #222;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1;
+    border-radius: 5px;
+  }
+  /* Content */
   main {
-    flex-grow: 1;
-    background-color: #ffffff;
-    max-width: 700px;
-    width: 90%;
-    margin: 40px 0;
-    padding: 30px 40px;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    background-color: white;
+    margin-top: 60px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
   }
-  h1 {
-    color: #555555;
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  header img {
+    max-width: 150px;
+  }
+  h2 {
+    color: #555;
+    margin-top: 40px;
   }
   .btn {
     display: inline-block;
     margin: 15px 10px;
     padding: 14px 28px;
-    background-color: #555555;
+    background-color: #555;
     color: white;
     text-decoration: none;
     border-radius: 6px;
@@ -53,34 +92,116 @@
     transition: background-color 0.3s ease;
   }
   .btn:hover {
-    background-color: #333333;
+    background-color: #333;
+  }
+  /* Demon list table */
+  .demon-list {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+  }
+  .demon-list th, .demon-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+  }
+  .demon-list th {
+    background-color: #eee;
   }
   footer {
-    width: 100%;
-    padding: 15px 0;
     background-color: #e0e0e0;
+    padding: 15px 0;
     font-size: 0.9rem;
-    color: #666666;
+    color: #666;
+    text-align: center;
+    margin-top: 30px;
   }
 </style>
 </head>
 <body>
-  <header>
-    <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision GDPS Logo">
-  </header>
-  <main>
-    <h1>Welcome to Vision GDPS!</h1>
-    <p>Create, rate, and share your own custom levels. Join our community and start playing today!</p>
-    
-    <!-- Download Buttons -->
-    <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" download class="btn">Download for PC</a>
-    <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" download class="btn">Download for Mobile</a>
-    
-    <!-- Discord -->
-    <a href="https://discord.gg/8FBhmRqYdN" class="btn" target="_blank" rel="noopener noreferrer">Join Discord</a>
-  </main>
-  <footer>
-    &copy; 2025 Vision GDPS. All rights reserved.
-  </footer>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+  <span class="closebtn" onclick="closeNav()">&times;</span>
+  <a href="#download">📥 Download</a>
+  <a href="#demonlist">💀 Demon List & Top Players</a>
+  <a href="#about">ℹ️ About Us</a>
+</div>
+
+<!-- Open button -->
+<button class="openbtn" onclick="openNav()">☰ Menu</button>
+
+<header>
+  <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision GDPS Logo">
+</header>
+
+<main>
+  <!-- Download Section -->
+  <section id="download">
+    <h2>📥 Download Vision GDPS</h2>
+    <a href="YOUR_PC_DOWNLOAD_LINK" class="btn">Download for PC</a>
+    <a href="YOUR_MOBILE_DOWNLOAD_LINK" class="btn">Download for Mobile</a>
+  </section>
+
+  <!-- Demon List Section -->
+  <section id="demonlist">
+    <h2>💀 Official Demon List</h2>
+    <table class="demon-list">
+      <tr>
+        <th>Rank</th>
+        <th>Level</th>
+        <th>Creator</th>
+        <th>Decorator</th>
+        <th>Rating</th>
+        <th>ID</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Find My Way</td>
+        <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
+        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+        <td>108</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Hell</td>
+        <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
+        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+        <td>105</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Some End</td>
+        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+        <td>—</td>
+        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+        <td>114</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- About Us Section -->
+  <section id="about">
+    <h2>ℹ️ About Us</h2>
+    <p>Vision GDPS is a custom Geometry Dash Private Server where players can create, share, and rate unique levels. Our goal is to make a fun, fair, and creative space for GD fans worldwide.</p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Vision GDPS. All rights reserved.
+</footer>
+
+<script>
+function openNav() {
+  document.getElementById("mySidebar").style.width = "250px";
+}
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+}
+</script>
+
 </body>
 </html>
+
