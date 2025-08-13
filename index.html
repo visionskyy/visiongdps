@@ -1,236 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vision GDPS</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background-color: #f5f5f5;
-    display: flex;
-  }
-
-  /* Sidebar menu */
-  #sidebar {
-    width: 250px;
-    background-color: #fff;
-    height: 100vh;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    position: fixed;
-  }
-
-  #sidebar-header {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  #sidebar-header img {
-    height: 40px;
-    background-color: #fff;
-    border-radius: 5px;
-  }
-
-  #sidebar-header span {
-    margin-left: 10px;
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  #menu-label {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    cursor: default;
-    font-weight: bold;
-    font-size: 16px;
-    border-bottom: 1px solid #eee;
-  }
-
-  #menu-label span {
-    margin-left: 10px;
-  }
-
-  #sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  #sidebar ul li {
-    padding: 15px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
-  }
-
-  #sidebar ul li:hover { background-color: #ddd; }
-
-  main {
-    margin-left: 250px;
-    flex: 1;
-    padding: 20px;
-  }
-
-  section { display: none; }
-
-  #download { display: block; text-align: center; }
-
-  .download-btn {
-    display: inline-block;
-    margin: 15px;
-    padding: 18px 35px;
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  .download-btn:hover { background-color: #45a049; }
-
-  .discord-btn {
-    display: block;
-    margin: 20px auto;
-    padding: 12px 25px;
-    background-color: #7289DA;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    width: 200px;
-    text-align: center;
-    font-size: 16px;
-  }
-
-  .discord-btn:hover { background-color: #5b6eae; }
-
-  /* Demon List table */
-  table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    background-color: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-
-  th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #eee;
-  }
-
-  th { background-color: #f0f0f0; }
-
-  tr:hover { background-color: #f9f9f9; }
-
-  .verified-icon, .unverified-icon {
-    height: 20px;
-    vertical-align: middle;
-    margin-left: 5px;
-  }
-
-  .creator-icon, .decorator-icon, .rating-icon {
-    height: 20px;
-    vertical-align: middle;
-    margin-right: 5px;
-  }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision GDPS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+      color: #333;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      background-color: #f1f1f1;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header img {
+      height: 40px;
+      margin-right: 10px;
+    }
+    .menu-btn {
+      margin-left: auto;
+      font-size: 18px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .sidebar {
+      position: fixed;
+      top: 60px;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #f9f9f9;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      transition: left 0.3s;
+      z-index: 90;
+    }
+    .sidebar.show {
+      left: 0;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      margin: 20px 0;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    main {
+      padding: 80px 20px 20px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    .download-btn {
+      display: block;
+      width: 200px;
+      padding: 15px;
+      margin: 10px 0;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .discord-btn {
+      display: block;
+      width: 200px;
+      padding: 15px;
+      margin: 10px 0;
+      text-align: center;
+      background-color: #7289da;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+    .demon-list {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .demon-list th, .demon-list td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+    .demon-list th {
+      background-color: #f4f4f4;
+    }
+    .demon-list img {
+      height: 20px;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  </style>
 </head>
 <body>
 
-<div id="sidebar">
-  <div id="sidebar-header">
-    <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Logo">
-    <span>Vision GDPS</span>
+  <div class="header">
+    <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision Logo">
+    <span style="font-weight:bold;">Vision GDPS</span>
+    <button class="menu-btn" onclick="toggleMenu()">☰ Menu</button>
   </div>
-  <div id="menu-label">☰ Menu</div>
-  <ul>
-    <li onclick="showSection('download')">Download</li>
-    <li onclick="showSection('news')">News</li>
-    <li onclick="showSection('demon-list')">Demon List</li>
-    <li onclick="showSection('about')">About Us</li>
-  </ul>
-</div>
 
-<main>
-  <!-- Download Section -->
-  <section id="download">
-    <h2>Download Vision GDPS</h2>
-    <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" target="_blank" class="download-btn">Download PC</a>
-    <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" target="_blank" class="download-btn">Download Mobile</a>
-    <a href="https://discord.com/invite/YOUR_DISCORD_LINK" target="_blank" class="discord-btn">Join Discord</a>
-  </section>
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li onclick="showSection('download')">Download</li>
+      <li onclick="showSection('news')">News</li>
+      <li onclick="showSection('demon-list')">Demon List</li>
+      <li onclick="showSection('about')">About Us</li>
+    </ul>
+  </div>
 
-  <!-- News Section -->
-  <section id="news">
-    <h2>Latest News</h2>
-    <p>No news yet.</p>
-  </section>
+  <main>
+    <section id="download" class="section active">
+      <h1>Download Vision GDPS</h1>
+      <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" class="download-btn" target="_blank">Download PC</a>
+      <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" class="download-btn" target="_blank">Download Mobile</a>
+      <a href="https://discord.gg/8FBhmRqYdN" class="discord-btn" target="_blank">Join Discord</a>
+    </section>
 
-  <!-- Demon List Section -->
-  <section id="demon-list">
-    <h2>Official Demon List</h2>
-    <table>
-      <thead>
+    <section id="news" class="section">
+      <h1>News</h1>
+      <p>No news at the moment.</p>
+    </section>
+
+    <section id="demon-list" class="section">
+      <h1>Official Demon List</h1>
+      <table class="demon-list">
         <tr>
-          <th>Level</th>
+          <th>Top</th>
+          <th>Name</th>
           <th>Creator</th>
-          <th>Decorator</th>
+          <th>Decorated By</th>
           <th>Rating</th>
           <th>ID</th>
         </tr>
-      </thead>
-      <tbody>
         <tr>
-          <td>Find My Way <img src="https://i.ibb.co/WpnYgLGC/image.png" class="unverified-icon" alt="Unverified"></td>
-          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" class="creator-icon" alt="Sky"> SKY</td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="decorator-icon" alt="Icecam"> ICECAM</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
+          <td>1</td>
+          <td>Find My Way</td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">Icecam</td>
+          <td>Unverified</td>
           <td>108</td>
         </tr>
         <tr>
-          <td>Hell <img src="https://i.ibb.co/WpnYgLGC/image.png" class="verified-icon" alt="Verified"></td>
-          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" class="creator-icon" alt="Sky"> SKY</td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="decorator-icon" alt="Icecam"> ICECAM</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
+          <td>2</td>
+          <td>Hell</td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">Icecam</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon"> Extreme Demon</td>
           <td>105</td>
         </tr>
         <tr>
-          <td>Some End <img src="https://i.ibb.co/WpnYgLGC/image.png" class="verified-icon" alt="Verified"></td>
-          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" class="creator-icon" alt="Icecam"> ICECAM</td>
-          <td>-</td>
-          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" class="rating-icon" alt="Extreme Demon"> EXTREME DEMON</td>
+          <td>3</td>
+          <td>Some End</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">Icecam</td>
+          <td>—</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon"> Extreme Demon</td>
           <td>114</td>
         </tr>
-      </tbody>
-    </table>
-  </section>
+      </table>
+    </section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Vision GDPS</h2>
-    <p>Vision GDPS is a fun Geometry Dash private server made by Sky. Play custom levels, challenge yourself, and enjoy the community!</p>
-  </section>
-</main>
+    <section id="about" class="section">
+      <h1>About Us</h1>
+      <p>Vision GDPS is a fan-made GDPS game with custom levels and a dedicated community.</p>
+    </section>
+  </main>
 
-<script>
-  function showSection(sectionId) {
-    const sections = ['download', 'news', 'demon-list', 'about'];
-    sections.forEach(id => {
-      document.getElementById(id).style.display = id === sectionId ? 'block' : 'none';
-    });
-  }
-</script>
+  <script>
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('show');
+    }
+
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
 
 </body>
 </html>
-
