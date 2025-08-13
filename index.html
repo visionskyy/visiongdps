@@ -10,8 +10,8 @@
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
-    scroll-behavior: smooth;
   }
+
   /* Sidebar */
   .sidebar {
     height: 100%;
@@ -32,6 +32,7 @@
     color: #ccc;
     display: block;
     transition: 0.2s;
+    cursor: pointer;
   }
   .sidebar a:hover {
     background-color: #444;
@@ -45,6 +46,7 @@
     color: white;
     cursor: pointer;
   }
+
   /* Open button */
   .openbtn {
     font-size: 20px;
@@ -59,6 +61,7 @@
     z-index: 1;
     border-radius: 5px;
   }
+
   /* Content */
   main {
     max-width: 900px;
@@ -95,7 +98,6 @@
   .btn:hover {
     background-color: #333;
   }
-  /* Demon list table */
   .demon-list {
     border-collapse: collapse;
     width: 100%;
@@ -124,9 +126,9 @@
 <!-- Sidebar -->
 <div id="mySidebar" class="sidebar">
   <span class="closebtn" onclick="closeNav()">&times;</span>
-  <a href="#download">📥 Download</a>
-  <a href="#demonlist">💀 Demon List & Top Players</a>
-  <a href="#about">ℹ️ About Us</a>
+  <a onclick="showSection('download')">📥 Download</a>
+  <a onclick="showSection('demonlist')">💀 Demon List & Top Players</a>
+  <a onclick="showSection('about')">ℹ️ About Us</a>
 </div>
 
 <!-- Open button -->
@@ -137,15 +139,15 @@
 </header>
 
 <main>
-  <!-- Download Section (default main view) -->
+  <!-- Download Section (default visible) -->
   <section id="download">
     <h2>📥 Download Vision GDPS</h2>
     <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" class="btn" target="_blank">Download for PC</a>
     <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" class="btn" target="_blank">Download for Mobile</a>
   </section>
 
-  <!-- Demon List Section -->
-  <section id="demonlist">
+  <!-- Demon List Section (hidden by default) -->
+  <section id="demonlist" style="display:none;">
     <h2>💀 Official Demon List & Top Players</h2>
     <table class="demon-list">
       <tr>
@@ -183,8 +185,8 @@
     </table>
   </section>
 
-  <!-- About Section -->
-  <section id="about">
+  <!-- About Section (hidden by default) -->
+  <section id="about" style="display:none;">
     <h2>ℹ️ About Us</h2>
     <p>Vision GDPS is a fan-made Geometry Dash Private Server (GDPS) where you can play, create, and share custom levels. Join our Discord for updates and support!</p>
     <a href="https://discord.gg/8FBhmRqYdN" target="_blank" class="btn">Join Our Discord</a>
@@ -201,6 +203,14 @@ function openNav() {
 }
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
+}
+
+function showSection(id) {
+  const sections = ['download', 'demonlist', 'about'];
+  sections.forEach(sec => {
+    document.getElementById(sec).style.display = (sec === id) ? 'block' : 'none';
+  });
+  closeNav();
 }
 </script>
 
