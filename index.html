@@ -1,125 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vision GDPS</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vision GDPS</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+    }
 
-  /* Sidebar */
-  .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #222;
-    overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 60px;
-    z-index: 2;
-  }
-  .sidebar a {
-    padding: 10px 20px;
-    text-decoration: none;
-    font-size: 18px;
-    color: #ccc;
-    display: block;
-    transition: 0.2s;
-    cursor: pointer;
-  }
-  .sidebar a:hover {
-    background-color: #444;
-    color: white;
-  }
-  .sidebar .closebtn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-  }
+    /* Sidebar */
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #222;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 2;
+    }
+    .sidebar a {
+      padding: 10px 20px;
+      text-decoration: none;
+      font-size: 18px;
+      color: #ccc;
+      display: block;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .sidebar a:hover {
+      background-color: #444;
+      color: white;
+    }
+    .sidebar .closebtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
 
-  /* Open button */
-  .openbtn {
-    font-size: 20px;
-    cursor: pointer;
-    background-color: #222;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1;
-    border-radius: 5px;
-  }
+    /* Open button */
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #222;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1;
+      border-radius: 5px;
+    }
 
-  /* Content */
-  main {
-    max-width: 900px;
-    margin: auto;
-    padding: 30px;
-    background-color: white;
-    margin-top: 60px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  }
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  header img {
-    max-width: 150px;
-  }
-  h2 {
-    color: #555;
-    margin-top: 40px;
-  }
-  .btn {
-    display: inline-block;
-    margin: 15px 10px;
-    padding: 14px 28px;
-    background-color: #555;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 1.2rem;
-    transition: background-color 0.3s ease;
-  }
-  .btn:hover {
-    background-color: #333;
-  }
-  .demon-list {
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 15px;
-  }
-  .demon-list th, .demon-list td {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
-  }
-  .demon-list th {
-    background-color: #eee;
-  }
-  footer {
-    background-color: #e0e0e0;
-    padding: 15px 0;
-    font-size: 0.9rem;
-    color: #666;
-    text-align: center;
-    margin-top: 30px;
-  }
-</style>
+    /* Content */
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+      background-color: white;
+      margin-top: 60px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    header img {
+      max-width: 150px;
+      opacity: 0.1;
+    }
+    h2 {
+      color: #555;
+      margin-top: 40px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 15px 10px;
+      padding: 14px 28px;
+      background-color: #555;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #333;
+    }
+    .demon-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    .demon-list th, .demon-list td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    .demon-list th {
+      background-color: #eee;
+    }
+    footer {
+      background-color: #e0e0e0;
+      padding: 15px 0;
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
+      margin-top: 30px;
+    }
+  </style>
 </head>
 <body>
 
@@ -150,38 +151,42 @@
   <section id="demonlist" style="display:none;">
     <h2>💀 Official Demon List & Top Players</h2>
     <table class="demon-list">
-      <tr>
-        <th>Rank</th>
-        <th>Level</th>
-        <th>Creator</th>
-        <th>Decorator</th>
-        <th>Rating</th>
-        <th>ID</th>
-      </tr>
-      <tr>
-        <td>1</td>
-        <td>Find My Way</td>
-        <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
-        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-        <td>108</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Hell</td>
-        <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
-        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-        <td>105</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Some End</td>
-        <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
-        <td>—</td>
-        <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
-        <td>114</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Level</th>
+          <th>Creator</th>
+          <th>Decorator</th>
+          <th>Rating</th>
+          <th>ID</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Find My Way</td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+          <td>108</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Hell</td>
+          <td><img src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky" height="24"> SKY</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+          <td>105</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Some End</td>
+          <td><img src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam" height="24"> ICECAM</td>
+          <td>—</td>
+          <td><img src="https://i.ibb.co/WpnYgLGC/image.png" alt="Extreme Demon" height="24"></td>
+          <td>114</td>
+        </tr>
+      </tbody>
     </table>
   </section>
 
