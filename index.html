@@ -1,307 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vision GDPS</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(120deg, #f5f5f5, #e0f7fa);
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision GDPS</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+  }
 
-    /* Left menu */
-    #menu {
-      position: fixed;
-      top: 0;
-      left: -250px;
-      width: 250px;
-      height: 100%;
-      background-color: #fff;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
-      transition: left 0.3s;
-      padding-top: 20px;
-      z-index: 1000;
-    }
+  /* Menu Button */
+  #menuBtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    cursor: pointer;
+    font-size: 18px;
+    background: #7289da;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: 0.3s;
+  }
+  #menuBtn:hover {
+    background: #5b6eae;
+  }
 
-    #menu.active {
-      left: 0;
-    }
+  /* Sidebar Menu */
+  #sidebar {
+    position: fixed;
+    left: -250px;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background: #ffffff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: 0.4s;
+    z-index: 99;
+  }
+  #sidebar.active {
+    left: 0;
+  }
+  #sidebar h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  #sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  #sidebar ul li {
+    margin: 20px 0;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  #sidebar ul li:hover {
+    color: #7289da;
+  }
 
-    #menu-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 20px 20px 20px;
-      border-bottom: 2px solid #ccc;
-    }
+  /* Sections */
+  .section {
+    display: none;
+    padding: 100px 20px 20px 20px;
+    text-align: center;
+  }
+  .section.active {
+    display: block;
+  }
 
-    #menu-header img {
-      width: 40px;
-      height: 40px;
-      background-color: #fff;
-      border-radius: 5px;
-    }
+  /* Download Buttons */
+  .download-btn {
+    margin: 10px;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: #7289da;
+    color: white;
+    transition: 0.3s;
+  }
+  .download-btn:hover {
+    background: #5b6eae;
+  }
 
-    #menu-header span {
-      font-size: 18px;
-      font-weight: bold;
-    }
+  /* Discord Button */
+  .discord-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 15px 25px;
+    font-size: 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: #7289da;
+    color: white;
+    transition: 0.3s;
+  }
+  .discord-btn:hover {
+    background: #5b6eae;
+  }
 
-    #menu ul {
-      list-style: none;
-      padding: 0;
-      margin: 20px 0 0 0;
-    }
+  /* Demon List Table */
+  .demon-table {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    border-collapse: collapse;
+  }
+  .demon-table th, .demon-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  .demon-table th {
+    background: #7289da;
+    color: white;
+  }
+  .verified {
+    color: green;
+    font-weight: bold;
+  }
+  .unverified {
+    color: red;
+    font-weight: bold;
+  }
 
-    #menu ul li {
-      padding: 15px 20px;
-      cursor: pointer;
-      border-bottom: 1px solid #eee;
-      transition: background 0.2s;
+  /* News Section */
+  .discord-news-container {
+    max-width: 700px;
+    margin: auto;
+  }
+  .discord-news {
+    margin-top: 20px;
+    border: 2px solid #7289da;
+    border-radius: 15px;
+    padding: 15px;
+    background-color: #f0f4ff;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s forwards;
+  }
+  .discord-news img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+  .discord-news .author {
+    font-weight: bold;
+    color: #2c2f33;
+  }
+  .discord-news .message {
+    margin: 0;
+    color: #23272a;
+    word-wrap: break-word;
+  }
+  @keyframes fadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
-
-    #menu ul li:hover {
-      background-color: #f0f0f0;
-    }
-
-    /* Menu button */
-    #menu-btn {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      z-index: 1100;
-      cursor: pointer;
-      font-size: 20px;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      padding: 10px 15px;
-      border-radius: 5px;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
-      transition: left 0.3s;
-    }
-
-    main {
-      margin-left: 0;
-      padding: 20px;
-      transition: margin-left 0.3s;
-      text-align: center;
-    }
-
-    main.shifted {
-      margin-left: 250px;
-    }
-
-    .section {
-      display: none;
-    }
-
-    .active-section {
-      display: block;
-    }
-
-    /* Download buttons side by side */
-    .downloads-container {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .download-btn {
-      flex: 1 1 150px;
-      padding: 15px;
-      background-color: #4CAF50;
-      color: #fff;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: transform 0.2s, background-color 0.2s;
-    }
-
-    .download-btn:hover {
-      background-color: #45a049;
-      transform: scale(1.05);
-    }
-
-    .download-text {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .discord-btn {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 12px 25px;
-      background-color: #7289da;
-      color: #fff;
-      text-align: center;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.2s;
-    }
-
-    .discord-btn:hover {
-      background-color: #5b6eae;
-    }
-
-    /* Demon list table like Pointercrate */
-    table {
-      width: 90%;
-      max-width: 1000px;
-      border-collapse: collapse;
-      margin: 20px auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f0f0f0;
-    }
-
-    .verified {
-      color: green;
-      font-weight: bold;
-    }
-
-    .unverified {
-      color: red;
-      font-weight: bold;
-    }
-
-    .creator-icon {
-      width: 20px;
-      height: 20px;
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-
-    /* Page decorations */
-    h1 {
-      text-shadow: 1px 1px 2px #aaa;
-    }
-
-    p {
-      margin-top: 10px;
-      font-size: 16px;
-    }
-
-  </style>
+  }
+</style>
 </head>
 <body>
 
-  <div id="menu-btn">☰ Menu</div>
+<button id="menuBtn">Menu</button>
 
-  <nav id="menu">
-    <div id="menu-header">
-      <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Logo">
-      <span>Vision GDPS</span>
-    </div>
-    <ul>
-      <li onclick="showSection('home')">Download</li>
-      <li onclick="showSection('news')">News</li>
-      <li onclick="showSection('demonlist')">Demon List</li>
-      <li onclick="showSection('about')">About Us</li>
-    </ul>
-  </nav>
+<div id="sidebar">
+  <h2><img src="https://i.ibb.co/27VZFRJY/image.png" width="40" height="40" alt="Logo"> Vision GDPS</h2>
+  <ul>
+    <li onclick="showSection('download')">Download</li>
+    <li onclick="showSection('news')">News</li>
+    <li onclick="showSection('demons')">Demon List</li>
+    <li onclick="showSection('about')">About Us</li>
+  </ul>
+</div>
 
-  <main id="main-content">
-    <!-- Home Section -->
-    <div id="home" class="section active-section">
-      <h1>Download Vision GDPS</h1>
-      <div class="downloads-container">
-        <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" class="download-btn" target="_blank">PC</a>
-        <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" class="download-btn" target="_blank">Mobile</a>
-      </div>
-      <div class="download-text">Join our Discord and stay updated!</div>
-      <a href="https://discord.gg/8FBhmRqYdN" target="_blank" class="discord-btn">Discord</a>
-    </div>
+<!-- Sections -->
+<div id="download" class="section active">
+  <button class="download-btn" onclick="window.open('https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file', '_blank')">PC Download</button>
+  <button class="download-btn" onclick="window.open('https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file', '_blank')">Mobile Download</button>
+  <br>
+  <button class="discord-btn" onclick="window.open('https://discord.gg/8FBhmRqYdN','_blank')">Join Our Discord</button>
+</div>
 
-    <!-- News Section -->
-    <div id="news" class="section">
-      <h1>News</h1>
-      <p>No news yet.</p>
-    </div>
+<div id="news" class="section">
+  <h1>News</h1>
+  <div class="discord-news-container"></div>
+</div>
 
-    <!-- Demon List Section -->
-    <div id="demonlist" class="section">
-      <h1>Official Demon List</h1>
-      <table>
-        <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Creator</th>
-          <th>Decorator</th>
-          <th>Rating</th>
-          <th>ID</th>
-        </tr>
-        <tr>
-          <td>1</td>
-          <td>???</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
-          <td class="unverified">Unverified</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Find My Way</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">Icecam</td>
-          <td class="unverified">Unverified</td>
-          <td>108</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Hell</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/FLPszMsj/image-removebg-preview-3.png" alt="Sky">Sky</td>
-          <td><img class="creator-icon" src="https://i.ibb.co/4RfyvpzH/image-removebg-preview-8.png" alt="Icecam">Icecam</td>
-          <td class="verified">Verified</td>
-          <td>12</td>
-        </tr>
-      </table>
-    </div>
+<div id="demons" class="section">
+  <h1>Demon List</h1>
+  <table class="demon-table">
+    <tr>
+      <th>Top</th>
+      <th>Name</th>
+      <th>Maker</th>
+      <th>Decorator</th>
+      <th>Rating</th>
+      <th>ID</th>
+    </tr>
+    <tr>
+      <td>Top 1</td>
+      <td class="unverified">???</td>
+      <td>Sky</td>
+      <td>Sky</td>
+      <td class="unverified">Unverified</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Top 2</td>
+      <td class="unverified">Find My Way</td>
+      <td>Sky</td>
+      <td>IceCam</td>
+      <td class="unverified">Unverified</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>Top 3</td>
+      <td class="verified">Hell</td>
+      <td>Sky</td>
+      <td>IceCam</td>
+      <td class="verified">Extreme Demon</td>
+      <td>105</td>
+    </tr>
+    <tr>
+      <td>Top 4</td>
+      <td class="verified">Some End</td>
+      <td>IceCam</td>
+      <td>-</td>
+      <td class="verified">Extreme Demon</td>
+      <td>114</td>
+    </tr>
+  </table>
+</div>
 
-    <!-- About Section -->
-    <div id="about" class="section">
-      <h1>About Us</h1>
-      <p>Vision GDPS is a fan-made Geometry Dash Private Server.</p>
-    </div>
-  </main>
+<div id="about" class="section">
+  <h1>About Us</h1>
+  <p>Welcome to Vision GDPS! A fun and challenging GDPS experience made by Sky & IceCam.</p>
+</div>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
-    const mainContent = document.getElementById('main-content');
+<script>
+// Menu toggle
+const menuBtn = document.getElementById('menuBtn');
+const sidebar = document.getElementById('sidebar');
 
-    menuBtn.addEventListener('click', () => {
-      menu.classList.toggle('active');
-      mainContent.classList.toggle('shifted');
+menuBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('active');
+});
 
-      // Move the menu button along with the menu
-      if(menu.classList.contains('active')) {
-        menuBtn.style.left = '270px'; // slightly outside menu width
-      } else {
-        menuBtn.style.left = '20px';
-      }
+// Section switch
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+// Discord News fetch
+const webhookURL = "https://discord.com/api/webhooks/1406000766044471437/4Rf0ZcfVrAw70NdFCb-gIcKvP7MrCkoWb2fio-wNkN_yq5vcxV0ExIWqLRiR9puzykyT";
+
+async function fetchDiscordMessages() {
+  try {
+    const res = await fetch(webhookURL);
+    const data = await res.json();
+
+    const newsContainer = document.querySelector('.discord-news-container');
+    newsContainer.innerHTML = '';
+
+    data.forEach(msg => {
+      const div = document.createElement('div');
+      div.classList.add('discord-news');
+      div.innerHTML = `
+        <img src="${msg.author.avatar}" alt="Profile">
+        <div>
+          <span class="author">${msg.author.username}</span>
+          <p class="message">${msg.content}</p>
+        </div>
+      `;
+      newsContainer.appendChild(div);
     });
 
-    function showSection(id) {
-      document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active-section'));
-      document.getElementById(id).classList.add('active-section');
-    }
-  </script>
+  } catch (err) {
+    console.error("Failed to fetch Discord messages:", err);
+  }
+}
+
+// Initial load and refresh
+fetchDiscordMessages();
+setInterval(fetchDiscordMessages, 30000);
+</script>
+
 </body>
 </html>
+
