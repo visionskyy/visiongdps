@@ -11,6 +11,22 @@
     background-color: #f2f2f2;
   }
 
+  /* Logo at top center */
+  #logo {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  #logo img {
+    width: 80px;
+    height: 80px;
+  }
+
+  #logo h1 {
+    margin: 10px 0 0 0;
+    font-size: 28px;
+  }
+
   /* Menu */
   #menu {
     position: fixed;
@@ -27,19 +43,6 @@
 
   #menu.open {
     left: 0;
-  }
-
-  #menu h1 {
-    margin-top: 0;
-    display: flex;
-    align-items: center;
-    font-size: 22px;
-  }
-
-  #menu h1 img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
   }
 
   #menu button {
@@ -73,7 +76,7 @@
     border-radius: 5px;
     background-color: #333;
     color: white;
-    transition: transform 0.2s, background-color 0.2s;
+    transition: left 0.3s, transform 0.2s, background-color 0.2s;
   }
 
   #menu-toggle:hover {
@@ -91,7 +94,13 @@
     margin-left: 0;
   }
 
-  /* Download section */
+  /* Download Section */
+  #download h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+
   .download-buttons {
     display: flex;
     justify-content: center;
@@ -161,10 +170,15 @@
 </head>
 <body>
 
+<!-- Logo at the top center -->
+<div id="logo">
+  <img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision Logo">
+  <h1>Vision GDPS</h1>
+</div>
+
 <button id="menu-toggle">Menu</button>
 
 <div id="menu">
-  <h1><img src="https://i.ibb.co/27VZFRJY/image.png" alt="Vision Logo"> Vision GDPS</h1>
   <button onclick="showSection('download')">Download</button>
   <button onclick="showSection('news')">News</button>
   <button onclick="showSection('demons')">Demon List</button>
@@ -174,6 +188,7 @@
 <main id="main-content">
   <!-- Download Section -->
   <section id="download">
+    <h2>Download</h2>
     <div class="download-buttons">
       <a href="https://www.mediafire.com/file/nxtieaf0n9johdz/Vision_GDPS.zip/file" target="_blank">PC Download</a>
       <a href="https://www.mediafire.com/file/yngzec99mxhcks2/Vision_GDPS.apk/file" target="_blank">Mobile Download</a>
@@ -192,14 +207,14 @@
     <div class="demon-box">
       <h2>#1 - ??? (Unverified)</h2>
       <p>Published by: Sky</p>
-      <p>Verifier: Wub</p>
+      <p>Verifier: Unverified</p>
       <img src="https://i.ibb.co/cfyL92v/image.png" alt="??? Screenshot" class="demon-screenshot">
     </div>
 
     <div class="demon-box">
       <h2>#2 - Find My Way (Unverified)</h2>
       <p>Published by: Sky</p>
-      <p>Verifier: Sky</p>
+      <p>Verifier: Unverified</p>
       <img src="https://i.ibb.co/5XpydVKq/image.png" alt="Find My Way Screenshot" class="demon-screenshot">
     </div>
 
@@ -228,10 +243,15 @@
 <script>
   const menuToggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('menu');
-  const main = document.getElementById('main-content');
 
   menuToggle.addEventListener('click', () => {
     menu.classList.toggle('open');
+    // Move the button with the menu
+    if(menu.classList.contains('open')) {
+      menuToggle.style.left = '270px';
+    } else {
+      menuToggle.style.left = '20px';
+    }
   });
 
   function showSection(sectionId) {
@@ -240,6 +260,7 @@
       document.getElementById(id).style.display = (id === sectionId) ? 'block' : 'none';
     });
     menu.classList.remove('open');
+    menuToggle.style.left = '20px';
   }
 </script>
 
